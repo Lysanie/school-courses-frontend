@@ -1,0 +1,42 @@
+<section>
+<div style= "width: 450px" >
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" class="form-control" id="courseId" name="id" formControlName="id">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" id="courseName" name="name" formControlName="name">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+          <div *ngIf="name.errors.required">
+            Name is required.
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" class="form-control" id="date" name="date" formControlName="date">
+      <div *ngIf="name.date && (date.dirty || date.touched)" class="alert alert-danger">
+          <div *ngIf="date.errors.required">
+            Date is required.
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <p-listbox [options]="students" formControlName="studentList" multiple="multiple" checkbox="checkbox"
+        filter="filter" optionLabel="name">
+        <p-header>
+          <i class="fa fa-car"></i>
+          Select Students
+        </p-header>
+      </p-listbox>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary"  [disabled]='!courseForm.valid'>Save</button>
+    <button type="button" class="btn btn-danger" style="margin-left:10px;" (click)="delete()" *ngIf="canDelete">Delete
+      Course</button>
+  </form>
+
+</div>
+</section>

@@ -1,0 +1,49 @@
+<section>
+  <div style="width: 450px">
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+      <input type="hidden" class="form-control" id="studentId" name="id" formControlName="id">
+      <input type="hidden" class="form-control" id="studentCode" name="studentCode" formControlName="studentCode">
+
+      <div class="form-group">
+        <label for="studentFirstName">First Name</label>
+        <input type="text" class="form-control" id="studentFirstName" formControlName="firstName">
+        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+          <div *ngIf="firstName.errors.required">
+            First Name is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" formControlName="lastName">
+        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+            <div *ngIf="lastName.errors.required">
+              Last Name is required.
+            </div>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" formControlName="email"
+          placeholder="email@example.com">
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+              <div *ngIf="email.errors.required">
+                Email is required.
+              </div>
+            </div>
+          
+      </div>
+
+      <div class="form-group">
+        <label for="studentPhone">Phone</label>
+        <input type="phone" class="form-control" id="studentPhone" formControlName="phone">
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]='!studentForm.valid'>Save</button>
+      <button type="button" class="btn btn-danger" style="margin-left:10px;" (click)="delete()"
+        *ngIf="canDelete">Delete</button>
+    </form>
+  </div>
+</section>
