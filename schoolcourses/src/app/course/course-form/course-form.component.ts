@@ -33,7 +33,7 @@ export class CourseFormComponent implements OnInit {
     this.courseForm = this.formBuilder.group({
       id: [''],
       name: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [new Date().toLocaleDateString(), Validators.required],
       studentList: ['']
     });
   }
@@ -65,7 +65,7 @@ export class CourseFormComponent implements OnInit {
   }
 
   updateForm(course: Course) {
-    const dateFormated = formatDate(course.date, 'dd-MM-yyyy', 'en-US');
+    const dateFormated = formatDate(course.date, 'yyyy-MM-dd', 'en-US');
     this.courseForm.patchValue({
       id: course.id,
       name: course.name,
@@ -74,7 +74,7 @@ export class CourseFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const students = this.courseForm.value.studentList.map(student => {
+    const students = (this.courseForm.value.studentList || []).map(student => {
       return this.studentsInfo.find(sinfo => sinfo.id === student.code);
     });
 

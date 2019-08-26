@@ -21,7 +21,7 @@ export class CourseService {
 
   postCourse(course: Course) {
     return this.http
-      .put('http://localhost:8080/course/', course);
+      .put('http://localhost:8080/course', course);
   }
 
   deleteCourse(name: string) {
